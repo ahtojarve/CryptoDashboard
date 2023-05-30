@@ -1,0 +1,14 @@
+{
+  "name": "Python and R Dev Container",
+  "image": "python:3.9",
+  "extensions": [
+    "ms-python.python",
+    "r.rstudio"
+  ],
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "r.bracketedPaste": true
+  },
+  "forwardPorts": [8787],
+  "postCreateCommand": "pip install python-binance && apt-get update && apt-get -y install r-base && apt-get -y install gdebi-core && wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-2021.09.0-351-amd64.deb && gdebi --n rstudio-2021.09.0-351-amd64.deb"
+}
