@@ -7,8 +7,8 @@ API_URL = 'https://api.binance.com/api/v3/klines'
 
 # Parameters for the API request
 symbol = 'BTCUSDT'  # BTC/USDT trading pair
-interval = '30m'    # 30-minute interval
-start_time = int((datetime.now() - timedelta(days=365)).timestamp() * 1000)  # 1 year ago in milliseconds
+interval = '1d'    # 1 day interval
+start_time = int((datetime.now() - timedelta(days=365 * 2)).timestamp() * 1000)  # 2 years ago in milliseconds
 end_time = int(datetime.now().timestamp() * 1000)  # Current time in milliseconds
 
 # SQLite database setup
@@ -28,6 +28,13 @@ cursor.execute('''
     )
 ''')
 conn.commit()
+
+# Delete existing data from the table
+cursor.execute('DELETE FROM btc_price')
+
+# Commit the deletion
+conn.commit()
+
 
 # Fetch BTC price data from Binance API
 response = requests.get(API_URL, params={
